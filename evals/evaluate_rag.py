@@ -185,22 +185,20 @@ def judge_ground_truth(
 
 if __name__ == "__main__":
     qa_items = load_golden_qa()
-    q1 = qa_items[0]
-
     print(
-        f"Loaded {len(qa_items)} Golden QA items. Running holistic LLM Judge ({JUDGE_MODEL}, reasoning_effort={JUDGE_REASONING_EFFORT}) on {q1['id']}...\n"
+        f"Loaded {len(qa_items)} Golden QA items. Running holistic LLM Judge ({JUDGE_MODEL}, reasoning_effort={JUDGE_REASONING_EFFORT})...\n"
     )
+    failures = []
+    for i,q in enumerate(qa_items):
+        res_graph = judge_ground_truth(q, q["expected_answer"])
+        if not res_graph['success']:
+            failures.append(res_graph)
 
-    naive_answer = (
-        "Based on Section 2.1, 2.2, and 2.3, Manifold Loop B at 120 PSI uses PIPE-HDPE11-STD piping, "
-        "VLV-200-SS isolation valve, SEAL-VT-09 Viton seals, BOLT-B7-2H bolts, and ACT-PN-100 actuator."
-    )
-
-    res_naive = judge_ground_truth(q1, naive_answer)
-    res_graph = judge_ground_truth(q1, q1["expected_answer"])
-
-    print("=== 1. Naive Top-3 Vector RAG Verdict ===")
-    print(json.dumps(res_naive, indent=2))
-
-    print("\n=== 2. Reference / Graph-Compiled CTE Verdict ===")
-    print(json.dumps(res_graph, indent=2))
+        # print(f"\n=== {i+1}. Reference / Graph-Compiled CTE Verdict ===")
+        # print(json.dumps(res_graph, indent=2))
+    
+    print(f'Got {len(qa_items)-len(failures)} of {len(qa_items)} ({100.*(len(qa_items)-len(failures))/len(qa_items)}) right.',end=' ')
+    if failures:
+        print('Failures: ')
+    for failure in failures:
+        print(json.dumps(failure,indent=2))
