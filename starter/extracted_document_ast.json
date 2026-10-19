@@ -1,0 +1,270 @@
+{
+  "schema_version": "2026.4-AST",
+  "pipeline_stage": "STAGE_1_DOCUMENT_AST_EXTRACTION",
+  "documents": [
+    {
+      "doc_id": "DOC-01-VOL1",
+      "source_file": "VOL1_Borealis_General_and_Baseline_Specs.pdf",
+      "sections": [
+        {
+          "section_id": "SEC-1.0",
+          "title": "GENERAL SITE PARAMETERS & PRECEDENCE HIERARCHY",
+          "default_precedence_tier": 1,
+          "clauses": [
+            {
+              "clause_id": "SEC-1.1",
+              "parent_section_id": "SEC-1.0",
+              "precedence_tier": 1,
+              "heading": "Facility Classification and Exposure",
+              "text": "The  Borealis  Central  Processing  Facility  and  all  associated  satellite  gathering  manifolds  (Specifically Manifold Loops A, B, and C) are designated as a  Class-3 Arctic Industrial Zone (Zone-A3) . Unlike enclosed temperate skid modules, all primary manifold assemblies, pigging receivers, and outdoor transfer headers operate continuously in exposed ambient conditions subject to wind-chill and radiative cooling.",
+              "has_table": false,
+              "deterministic_cross_refs": [],
+              "deterministic_part_skus": []
+            },
+            {
+              "clause_id": "SEC-1.2",
+              "parent_section_id": "SEC-1.0",
+              "precedence_tier": 1,
+              "heading": "Thermal & Pressure Envelope Baseline",
+              "text": "Under normal steady-state circulation, the primary process fluid is maintained between +15\u00b0C and +40\u00b0C at a  nominal  operating  pressure  of  120  PSI  (8.27  bar),  with  surge  tolerances  up  to  145  PSI.  However, meteorological records for Zone-A3 mandate a winter minimum ambient design temperature (MDMT) of -42\u00b0C (-43.6\u00b0F)  during shutdown, stagnant hold, or cold-restart events. Consequently, any piping, valve, fastener, or instrumentation component installed in Zone-A3 is strictly subject to the Cryogenic Excursion Protocol detailed in Volume II, Section 4.3.",
+              "has_table": false,
+              "deterministic_cross_refs": [
+                "SEC-4.3"
+              ],
+              "deterministic_part_skus": []
+            },
+            {
+              "clause_id": "SEC-1.3",
+              "parent_section_id": "SEC-1.0",
+              "precedence_tier": 1,
+              "heading": "Order of Precedence for Conflicting Specifications",
+              "text": "Contractors  and  automated  quoting  systems  must  resolve  material  conflicts  using  a  strict  three-tier precedence  model.  In  the  event  of  conflicting  part  numbers,  material  grades,  or  pressure-temperature ratings: Tier 1 (Baseline): Section 2.0 Baseline Piping & Valve Schedules apply only to standard non- excursion service. Tier 2 (Environmental & Chemical Overrides): Volume II, Section 4.0 Environmental and Chemical Excursion Protocols strictly SUPERSEDE all Tier 1 Baseline Schedules whenever their triggering thresholds are met. Tier 3 (Active Safety Interlocks): Volume II, Section 5.0 Mechanical & Actuator Safety Interlocks SUPERSEDE both Tier 1 and Tier 2 specifications.",
+              "has_table": false,
+              "deterministic_cross_refs": [],
+              "deterministic_part_skus": []
+            }
+          ]
+        },
+        {
+          "section_id": "SEC-2.0",
+          "title": "BASELINE PIPING, VALVES & FASTENER SCHEDULES",
+          "default_precedence_tier": 1,
+          "clauses": [
+            {
+              "clause_id": "SEC-2.1",
+              "parent_section_id": "SEC-2.0",
+              "precedence_tier": 1,
+              "heading": "Baseline Mainline & Header Piping",
+              "text": "For pressurized fluid transfer headers operating between 100 PSI and 150 PSI, standard High-Density Polyethylene (HDPE) PE-4710 SDR-11 piping (Part #PIPE-HDPE11-STD) with butt-fusion joints is approved as the default baseline material. \u2022 \u2022 \u2022",
+              "has_table": false,
+              "deterministic_cross_refs": [],
+              "deterministic_part_skus": [
+                "PART:PIPE-HDPE11-STD"
+              ]
+            },
+            {
+              "clause_id": "SEC-2.2",
+              "parent_section_id": "SEC-2.0",
+              "precedence_tier": 1,
+              "heading": "Baseline Manifold Isolation Valves & Elastomer Seals",
+              "text": "Standard manifold isolation and block valves across Loops A, B, and C shall utilize 316 Stainless Steel floating ball valves, Part # VLV-200-SS, factory-fitted with standard fluorocarbon Viton (FKM-A) O-ring stem and seat seals (Part # SEAL-VT-09), paired with standard pneumatic rack-and-pinion actuator Part # ACT- PN-100. Service Loop NominalPressure Baseline PipeSKU BaselineValve SKU Baseline SealSKU BaselineActuator SKU Manifold Loop A (Glycol Return) 110 PSI PIPE-HDPE11-STD VLV-200-SS SEAL-VT-09(FKM-A) ACT-PN-100 Manifold Loop B (Primary Transfer) 120 PSI PIPE-HDPE11-STD VLV-200-SS SEAL-VT-09(FKM-A) ACT-PN-100 Manifold Loop C (Produced Water) 95 PSI PIPE-HDPE11-STD VLV-200-SS SEAL-VT-09(FKM-A) ACT-PN-100 *Table 2.1 Note: All baseline SKUs listed above assume +15\u00b0C minimum ambient exposure and zero polar-solvent dosing. Verify chemical dosing streams in Section 3.0 and excursion overrides in Volume II before releasing Bill of Materials.",
+              "has_table": false,
+              "deterministic_cross_refs": [],
+              "deterministic_part_skus": []
+            },
+            {
+              "clause_id": "SEC-2.3",
+              "parent_section_id": "SEC-2.0",
+              "precedence_tier": 1,
+              "heading": "Baseline Flange Fasteners & Bolting",
+              "text": "All flanged metallic-to-polymer transition spools and valve bodies shall be assembled using  ASTM A193 Grade B7 chromium-molybdenum alloy steel stud bolts paired with ASTM A194 Grade 2H  heavy hex nuts (Kit #BOLT-B7-2H), unless overridden by low-temperature brittle-fracture schedules (see Section 4.2).",
+              "has_table": false,
+              "deterministic_cross_refs": [
+                "SEC-4.2"
+              ],
+              "deterministic_part_skus": [
+                "PART:BOLT-B7-2H"
+              ]
+            }
+          ]
+        },
+        {
+          "section_id": "SEC-3.0",
+          "title": "PROCESS FLUID COMPOSITION & INJECTION STREAMS",
+          "default_precedence_tier": 1,
+          "clauses": [
+            {
+              "clause_id": "SEC-3.1",
+              "parent_section_id": "SEC-3.0",
+              "precedence_tier": 1,
+              "heading": "Primary Heat-Transfer Stream",
+              "text": "The primary heat-transfer medium circulating through Manifold Loops A and B consists of a 60/40 inhibited propylene glycol/water mixture containing up to 1.5% entrained light hydrocarbon condensate.",
+              "has_table": false,
+              "deterministic_cross_refs": [],
+              "deterministic_part_skus": []
+            },
+            {
+              "clause_id": "SEC-3.2",
+              "parent_section_id": "SEC-3.0",
+              "precedence_tier": 1,
+              "heading": "Automated Anti-Hydrate Methanol Injection (Manifold Loop B)",
+              "text": "To prevent gas-hydrate plugging during winter operations, whenever ambient temperatures fall below -15\u00b0C, Automated Chemical Dosing Skid #DS-04 continuously injects  anhydrous methanol (MeOH)  at 8.0% volume concentration directly into  Manifold Loop B  upstream of the primary isolation valves. Manifold Loops A and C do not receive methanol injection.",
+              "has_table": false,
+              "deterministic_cross_refs": [],
+              "deterministic_part_skus": [
+                "PART:DS-04"
+              ]
+            },
+            {
+              "clause_id": "SEC-3.3",
+              "parent_section_id": "SEC-3.0",
+              "precedence_tier": 1,
+              "heading": "Polar-Solvent Service Mandate",
+              "text": "Any piping segment, valve chamber, or elastomer seal exposed to anhydrous methanol injection (as defined in Section 3.2) is formally classified as a Polar-Solvent Service Line. All components in a Polar-Solvent Service Line must comply with the chemical compatibility overrides in Volume II, Section 4.5.",
+              "has_table": false,
+              "deterministic_cross_refs": [
+                "SEC-3.2",
+                "SEC-4.5"
+              ],
+              "deterministic_part_skus": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "doc_id": "DOC-02-VOL2",
+      "source_file": "VOL2_Borealis_Excursion_Overrides_and_Interlocks.docx",
+      "sections": [
+        {
+          "section_id": "SEC-4.0",
+          "title": "ENVIRONMENTAL & CHEMICAL EXCURSION OVERRIDES (TIER 2)",
+          "default_precedence_tier": 2,
+          "clauses": [
+            {
+              "clause_id": "SEC-4.1",
+              "parent_section_id": "SEC-4.0",
+              "precedence_tier": 2,
+              "heading": "Thermal Derating & Replacement of Polymer Piping",
+              "text": "Although baseline PE-4710 SDR-11 piping (Part #PIPE-HDPE11-STD, Section 2.1) is nominally rated to -40\u00b0C under static zero-pressure conditions, dynamic pressurized service (>100 PSI) in Zone-A3 environments (ambient below -35\u00b0C) combined with trace hydrocarbon condensate PROHIBITS the use of standard PE-4710 SDR-11 due to rapid crack propagation (RCP) failure risk. All such lines MUST upgrade to Cross-Linked Polyethylene PEX-a SDR-9 Arctic Grade (Part #PIPE-PEX9-ARC) or seamless carbon steel ASTM A333 Grade 6.",
+              "has_table": false,
+              "deterministic_cross_refs": [
+                "SEC-2.1"
+              ],
+              "deterministic_part_skus": [
+                "PART:PIPE-HDPE11-STD",
+                "PART:PIPE-PEX9-ARC"
+              ]
+            },
+            {
+              "clause_id": "SEC-4.2",
+              "parent_section_id": "SEC-4.0",
+              "precedence_tier": 2,
+              "heading": "Low-Temperature Flange Bolting Override",
+              "text": "Baseline ASTM A193 Grade B7 stud bolts (Kit #BOLT-B7-2H, Section 2.3) exhibit rapid Charpy V-notch impact degradation below -29\u00b0C. Any flange assembly subject to the Cryogenic Excursion Protocol (Section 4.3) PROHIBITS Grade B7 fasteners and MUST upgrade to Charpy impact-tested ASTM A320 Grade L7 alloy steel stud bolts paired with ASTM A194 Grade 4/L4 heavy hex nuts (Kit #BOLT-L7-L4).",
+              "has_table": false,
+              "deterministic_cross_refs": [
+                "SEC-2.3",
+                "SEC-4.3"
+              ],
+              "deterministic_part_skus": [
+                "PART:BOLT-B7-2H",
+                "PART:BOLT-L7-L4"
+              ]
+            },
+            {
+              "clause_id": "SEC-4.3",
+              "parent_section_id": "SEC-4.0",
+              "precedence_tier": 2,
+              "heading": "Cryogenic Excursion Protocol Trigger",
+              "text": "The Cryogenic Excursion Protocol is automatically triggered for any outdoor assembly located in a zone where the minimum design ambient temperature (MDMT) is below -30\u00b0C (including Zone-A3 at -42\u00b0C per Section 1.2). Activation of Section 4.3 mandates: (a) Low-temperature bolting per Section 4.2, (b) Thermal piping upgrade per Section 4.1, and (c) Immediate PROHIBITION of baseline Viton FKM-A elastomer seals (Part #SEAL-VT-09, Section 2.2) due to glass-transition embrittlement and seal fracture below -26\u00b0C.",
+              "has_table": false,
+              "deterministic_cross_refs": [
+                "SEC-1.2",
+                "SEC-2.2",
+                "SEC-4.1",
+                "SEC-4.2"
+              ],
+              "deterministic_part_skus": [
+                "PART:SEAL-VT-09"
+              ]
+            },
+            {
+              "clause_id": "SEC-4.4",
+              "parent_section_id": "SEC-4.0",
+              "precedence_tier": 2,
+              "heading": "Low-Temperature Elastomer Seal Substitution",
+              "text": "Whenever baseline Viton seals (Part #SEAL-VT-09) are prohibited by Section 4.3, engineers shall substitute Low-Temperature Fluorosilicone (FVMQ, Part #SEAL-FVMQ-40) inside standard valve body #VLV-200-SS, UNLESS the flow path is classified as a Polar-Solvent Service Line under Section 3.3.",
+              "has_table": false,
+              "deterministic_cross_refs": [
+                "SEC-3.3",
+                "SEC-4.3"
+              ],
+              "deterministic_part_skus": [
+                "PART:SEAL-FVMQ-40",
+                "PART:SEAL-VT-09",
+                "PART:VLV-200-SS"
+              ]
+            },
+            {
+              "clause_id": "SEC-4.5",
+              "parent_section_id": "SEC-4.0",
+              "precedence_tier": 2,
+              "heading": "Polar-Solvent & Dual-Excursion Seal Override",
+              "text": "Fluorosilicone (FVMQ, Part #SEAL-FVMQ-40) and standard EPDM elastomers experience severe volumetric swell (>45%) and extrusion failure when exposed to anhydrous methanol + trace hydrocarbon mixtures (Section 3.2 / Section 3.3). Therefore, for any flow path subject to BOTH Cryogenic Excursion (Section 4.3) AND Polar-Solvent Service (Section 3.3), Part #SEAL-FVMQ-40 is PROHIBITED. The ONLY approved elastomer is Ultra-Low-Temperature Perfluoroelastomer FFKM (Part #SEAL-FFKM-ULT90). Furthermore, due to the wider gland geometry of #SEAL-FFKM-ULT90, baseline valve body #VLV-200-SS cannot be used; the assembly MUST upgrade to the Cryogenic Trunnion Ball Valve Body (Part #VLV-200-LT).\n\n[EMBEDDED_SPEC_TABLE]\n| Condition / Regime | Trigger Criteria | Prohibited SKUs | Mandated Seal SKU | Mandated Valve SKU |\n| --- | --- | --- | --- | --- |\n| Temperate Baseline (Sec 2.2) | Ambient >= -15\u00b0C, No MeOH | None | SEAL-VT-09 (FKM-A) | VLV-200-SS |\n| Cryogenic Only (Sec 4.4) | Ambient < -30\u00b0C, No MeOH (Loops A/C) | SEAL-VT-09, BOLT-B7-2H | SEAL-FVMQ-40 (FVMQ) | VLV-200-SS |\n| Dual Cryogenic + Polar-Solvent (Sec 4.5) | Ambient < -30\u00b0C + MeOH Injection (Loop B) | SEAL-VT-09, SEAL-FVMQ-40, VLV-200-SS | SEAL-FFKM-ULT90 (FFKM) | VLV-200-LT |",
+              "has_table": true,
+              "deterministic_cross_refs": [
+                "SEC-3.2",
+                "SEC-3.3",
+                "SEC-4.3"
+              ],
+              "deterministic_part_skus": [
+                "PART:SEAL-FFKM-ULT90",
+                "PART:SEAL-FVMQ-40",
+                "PART:VLV-200-LT",
+                "PART:VLV-200-SS"
+              ]
+            }
+          ]
+        },
+        {
+          "section_id": "SEC-5.0",
+          "title": "ACTIVE SAFETY INTERLOCKS & ACTUATOR SIZING (TIER 3)",
+          "default_precedence_tier": 3,
+          "clauses": [
+            {
+              "clause_id": "SEC-5.1",
+              "parent_section_id": "SEC-5.0",
+              "precedence_tier": 3,
+              "heading": "Stem Breakaway Torque Multiplier for Ultra-Low-Temp FFKM",
+              "text": "Empirical cold-box testing confirms that installing Perfluoroelastomer seal Part #SEAL-FFKM-ULT90 inside Cryogenic Trunnion Valve #VLV-200-LT increases valve stem breakaway torque by 185% at -40\u00b0C (reaching 215 Nm) compared to baseline Viton seats.",
+              "has_table": false,
+              "deterministic_cross_refs": [],
+              "deterministic_part_skus": [
+                "PART:SEAL-FFKM-ULT90",
+                "PART:VLV-200-LT"
+              ]
+            },
+            {
+              "clause_id": "SEC-5.2",
+              "parent_section_id": "SEC-5.0",
+              "precedence_tier": 3,
+              "heading": "Mandatory Hydraulic Actuator Substitution Directive",
+              "text": "Baseline pneumatic rack-and-pinion actuator Part #ACT-PN-100 (Section 2.2) has a maximum output torque of 120 Nm and WILL STALL under emergency shutdown (ESD) demand when paired with #SEAL-FFKM-ULT90 below -30\u00b0C. Consequently, whenever Valve #VLV-200-LT is fitted with Seal #SEAL-FFKM-ULT90, Part #ACT-PN-100 is PROHIBITED and the assembly MUST upgrade to High-Torque Spring-Return Hydraulic Actuator Part #ACT-HYD-350 (rated to 400 Nm at -50\u00b0C).",
+              "has_table": false,
+              "deterministic_cross_refs": [
+                "SEC-2.2"
+              ],
+              "deterministic_part_skus": [
+                "PART:ACT-HYD-350",
+                "PART:ACT-PN-100",
+                "PART:SEAL-FFKM-ULT90",
+                "PART:VLV-200-LT"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

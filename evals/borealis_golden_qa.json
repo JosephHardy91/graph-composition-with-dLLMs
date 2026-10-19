@@ -1,0 +1,245 @@
+{
+  "dataset_name": "Borealis_Graph_Compiled_RAG_Golden_QA",
+  "version": "2026.4",
+  "description": "Adversarial multi-hop specification QA benchmark testing Tier 1 -> Tier 2 -> Tier 3 overrides, negative SKU prohibitions, and provenance trace verification.",
+  "items": [
+    {
+      "id": "QA-01",
+      "category": "4-Hop Dual-Excursion + Safety Interlock (Full BOM)",
+      "question": "We are quoting the complete assembly (piping, isolation valve, elastomer seal, flange bolting kit, and actuator) for Manifold Loop B at the Borealis facility operating at 120 PSI during winter conditions (-42\u00b0C). Which exact part SKUs are required?",
+      "site_parameters": {
+        "zone": "Zone-A3",
+        "loop_id": "B",
+        "pressure_psi": 120,
+        "ambient_temp_c": -42,
+        "methanol_present": true
+      },
+      "expected_answer": "For Manifold Loop B at -42\u00b0C and 120 PSI, the required SKUs are piping #PIPE-PEX9-ARC (or ASTM A333 Grade 6), Cryogenic Trunnion Valve #VLV-200-LT, Ultra-Low-Temp FFKM Seal #SEAL-FFKM-ULT90, low-temperature bolting kit #BOLT-L7-L4, and High-Torque Hydraulic Actuator #ACT-HYD-350.",
+      "ground_truth": {
+        "required_skus": [
+          "PIPE-PEX9-ARC",
+          "VLV-200-LT",
+          "SEAL-FFKM-ULT90",
+          "BOLT-L7-L4",
+          "ACT-HYD-350"
+        ],
+        "prohibited_skus": [
+          "PIPE-HDPE11-STD",
+          "VLV-200-SS",
+          "SEAL-VT-09",
+          "SEAL-FVMQ-40",
+          "BOLT-B7-2H",
+          "ACT-PN-100"
+        ],
+        "required_clauses": [
+          "SEC-1.2",
+          "SEC-3.2",
+          "SEC-3.3",
+          "SEC-4.1",
+          "SEC-4.2",
+          "SEC-4.3",
+          "SEC-4.5",
+          "SEC-5.2"
+        ],
+        "highest_precedence_tier": 3
+      }
+    },
+    {
+      "id": "QA-02",
+      "category": "2-Hop Single-Excursion (Cryogenic Only, No Polar-Solvent)",
+      "question": "What isolation valve body, elastomer seal, flange bolt kit, and actuator SKU are required for Manifold Loop A (Glycol Return, 110 PSI) at the Borealis facility during winter shutdown (-42\u00b0C)?",
+      "site_parameters": {
+        "zone": "Zone-A3",
+        "loop_id": "A",
+        "pressure_psi": 110,
+        "ambient_temp_c": -42,
+        "methanol_present": false
+      },
+      "expected_answer": "Manifold Loop A does not receive methanol injection (SEC-3.2), so it is subject to Cryogenic Excursion (SEC-4.3 / SEC-4.4) without the Polar-Solvent override. It requires standard valve body #VLV-200-SS fitted with Low-Temp Fluorosilicone seal #SEAL-FVMQ-40, low-temp bolt kit #BOLT-L7-L4, and baseline pneumatic actuator #ACT-PN-100.",
+      "ground_truth": {
+        "required_skus": [
+          "VLV-200-SS",
+          "SEAL-FVMQ-40",
+          "BOLT-L7-L4",
+          "ACT-PN-100"
+        ],
+        "prohibited_skus": [
+          "SEAL-VT-09",
+          "BOLT-B7-2H"
+        ],
+        "required_clauses": [
+          "SEC-1.2",
+          "SEC-2.2",
+          "SEC-3.2",
+          "SEC-4.2",
+          "SEC-4.3",
+          "SEC-4.4"
+        ],
+        "highest_precedence_tier": 2
+      }
+    },
+    {
+      "id": "QA-03",
+      "category": "Pressure Boundary Sensitivity (Low-Pressure Cryogenic Piping)",
+      "question": "Manifold Loop C (Produced Water) operates at 95 PSI in Zone-A3 (-42\u00b0C). Does Loop C require upgrading the piping to #PIPE-PEX9-ARC, and which bolting kit and seal SKU must be used?",
+      "site_parameters": {
+        "zone": "Zone-A3",
+        "loop_id": "C",
+        "pressure_psi": 95,
+        "ambient_temp_c": -42,
+        "methanol_present": false
+      },
+      "expected_answer": "Because Loop C operates at 95 PSI (which is not >100 PSI per SEC-4.1), the dynamic high-pressure polymer piping derating does not prohibit baseline #PIPE-HDPE11-STD, or if upgraded via SEC-4.3 general trigger, note that SEC-4.1 specifically targets dynamic pressurized service >100 PSI. However, Zone-A3 (-42\u00b0C) still triggers SEC-4.3 for bolting and seals, requiring bolt kit #BOLT-L7-L4 and Fluorosilicone seal #SEAL-FVMQ-40 inside valve #VLV-200-SS.",
+      "ground_truth": {
+        "required_skus": [
+          "BOLT-L7-L4",
+          "SEAL-FVMQ-40",
+          "VLV-200-SS"
+        ],
+        "prohibited_skus": [
+          "BOLT-B7-2H",
+          "SEAL-VT-09"
+        ],
+        "required_clauses": [
+          "SEC-2.2",
+          "SEC-4.1",
+          "SEC-4.2",
+          "SEC-4.3",
+          "SEC-4.4"
+        ],
+        "highest_precedence_tier": 2
+      }
+    },
+    {
+      "id": "QA-04",
+      "category": "Tier 3 Safety Interlock Causal Chain",
+      "question": "Why is pneumatic actuator #ACT-PN-100 prohibited on Manifold Loop B during winter operations, and what exact torque value and replacement SKU are mandated?",
+      "site_parameters": {
+        "zone": "Zone-A3",
+        "loop_id": "B",
+        "pressure_psi": 120,
+        "ambient_temp_c": -40,
+        "methanol_present": true
+      },
+      "expected_answer": "Manifold Loop B requires seal #SEAL-FFKM-ULT90 inside valve #VLV-200-LT (per SEC-4.5). Under SEC-5.1, #SEAL-FFKM-ULT90 increases stem breakaway torque by 185% at -40\u00b0C to 215 Nm. Because #ACT-PN-100 is only rated for 120 Nm, it will stall during emergency shutdown, so SEC-5.2 mandates High-Torque Hydraulic Actuator #ACT-HYD-350 (rated to 400 Nm).",
+      "ground_truth": {
+        "required_skus": [
+          "SEAL-FFKM-ULT90",
+          "VLV-200-LT",
+          "ACT-HYD-350"
+        ],
+        "prohibited_skus": [
+          "ACT-PN-100"
+        ],
+        "required_clauses": [
+          "SEC-4.5",
+          "SEC-5.1",
+          "SEC-5.2"
+        ],
+        "required_numeric_facts": [
+          "185%",
+          "215 Nm",
+          "120 Nm",
+          "400 Nm"
+        ],
+        "highest_precedence_tier": 3
+      }
+    },
+    {
+      "id": "QA-05",
+      "category": "Chemical Dosing Threshold (-20\u00b0C Sub-Zero vs Cryogenic Boundary)",
+      "question": "If an enclosed test skid on Manifold Loop B operates at an ambient minimum temperature of -20\u00b0C (above the -30\u00b0C Cryogenic Excursion threshold, but below the -15\u00b0C methanol dosing threshold), which chemical injection skid activates and why does Fluorosilicone (#SEAL-FVMQ-40) fail?",
+      "site_parameters": {
+        "zone": "Test-Skid",
+        "loop_id": "B",
+        "pressure_psi": 120,
+        "ambient_temp_c": -20,
+        "methanol_present": true
+      },
+      "expected_answer": "Because ambient temperature (-20\u00b0C) is below -15\u00b0C, Automated Chemical Dosing Skid #DS-04 injects 8.0% anhydrous methanol into Manifold Loop B (SEC-3.2), classifying it as a Polar-Solvent Service Line (SEC-3.3). Per SEC-4.5, Fluorosilicone (#SEAL-FVMQ-40) experiences severe volumetric swell (>45%) and extrusion failure in anhydrous methanol + trace hydrocarbon mixtures.",
+      "ground_truth": {
+        "required_skus": [
+          "DS-04"
+        ],
+        "prohibited_skus": [
+          "SEAL-FVMQ-40"
+        ],
+        "required_clauses": [
+          "SEC-3.2",
+          "SEC-3.3",
+          "SEC-4.5"
+        ],
+        "highest_precedence_tier": 2
+      }
+    },
+    {
+      "id": "QA-06",
+      "category": "Temperate Baseline Control Case (No Overrides Triggered)",
+      "question": "We are quoting an indoor temperate test loop (+20\u00b0C minimum ambient, 120 PSI, zero methanol dosing) using the Borealis baseline schedule. Which pipe, valve, seal, bolt kit, and actuator SKUs are approved?",
+      "site_parameters": {
+        "zone": "Indoor-Temperate",
+        "loop_id": "A",
+        "pressure_psi": 120,
+        "ambient_temp_c": 20,
+        "methanol_present": false
+      },
+      "expected_answer": "At +20\u00b0C with no methanol dosing, Tier 1 Baseline schedules (Section 2.0) govern without excursion overrides: pipe #PIPE-HDPE11-STD, valve #VLV-200-SS, Viton seal #SEAL-VT-09, bolt kit #BOLT-B7-2H, and pneumatic actuator #ACT-PN-100.",
+      "ground_truth": {
+        "required_skus": [
+          "PIPE-HDPE11-STD",
+          "VLV-200-SS",
+          "SEAL-VT-09",
+          "BOLT-B7-2H",
+          "ACT-PN-100"
+        ],
+        "prohibited_skus": [],
+        "required_clauses": [
+          "SEC-2.1",
+          "SEC-2.2",
+          "SEC-2.3"
+        ],
+        "highest_precedence_tier": 1
+      }
+    },
+    {
+      "id": "QA-07",
+      "category": "Precedence Hierarchy Resolution Rule",
+      "question": "According to the specification's Order of Precedence, if a Tier 2 Environmental Override conflicts with a Tier 3 Active Safety Interlock, which section wins and what clause defines this rule?",
+      "site_parameters": {},
+      "expected_answer": "Per Volume I, Section 1.3 (Order of Precedence for Conflicting Specifications), Tier 3 Active Safety Interlocks (Volume II, Section 5.0) strictly SUPERSEDE both Tier 1 (Section 2.0 Baseline) and Tier 2 (Section 4.0 Environmental & Chemical Overrides).",
+      "ground_truth": {
+        "required_skus": [],
+        "prohibited_skus": [],
+        "required_clauses": [
+          "SEC-1.3"
+        ],
+        "highest_precedence_tier": 3
+      }
+    },
+    {
+      "id": "QA-08",
+      "category": "Metallurgical Brittle-Fracture Threshold",
+      "question": "At what exact temperature do baseline ASTM A193 Grade B7 stud bolts (#BOLT-B7-2H) exhibit Charpy V-notch impact degradation, and what exact bolt/nut kit replaces them under Section 4.2?",
+      "site_parameters": {
+        "ambient_temp_c": -30
+      },
+      "expected_answer": "Per Section 4.2, ASTM A193 Grade B7 stud bolts (#BOLT-B7-2H) exhibit rapid Charpy V-notch impact degradation below -29\u00b0C and must be replaced with Charpy impact-tested ASTM A320 Grade L7 stud bolts paired with ASTM A194 Grade 4/L4 nuts (Kit #BOLT-L7-L4).",
+      "ground_truth": {
+        "required_skus": [
+          "BOLT-L7-L4"
+        ],
+        "prohibited_skus": [
+          "BOLT-B7-2H"
+        ],
+        "required_clauses": [
+          "SEC-2.3",
+          "SEC-4.2"
+        ],
+        "required_numeric_facts": [
+          "-29\u00b0C"
+        ],
+        "highest_precedence_tier": 2
+      }
+    }
+  ]
+}

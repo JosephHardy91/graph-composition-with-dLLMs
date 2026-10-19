@@ -1,0 +1,363 @@
+[
+  {
+    "clause_id": "SEC-1.1",
+    "parent_section_id": "SEC-1.0",
+    "precedence_tier": 1,
+    "semantic_edges": []
+  },
+  {
+    "clause_id": "SEC-1.2",
+    "parent_section_id": "SEC-1.0",
+    "precedence_tier": 1,
+    "semantic_edges": [
+      {
+        "source_node_id": "SEC-1.2",
+        "target_node_id": "SEC-4.3",
+        "relation_type": "REFERENCES",
+        "condition_predicate": "ambient_temp_c <= -42 && (loop_id == \"shutdown\" || loop_id == \"hold\" || loop_id == \"cold_restart\")"
+      }
+    ]
+  },
+  {
+    "clause_id": "SEC-1.3",
+    "parent_section_id": "SEC-1.0",
+    "precedence_tier": 1,
+    "semantic_edges": [
+      {
+        "source_node_id": "SEC-1.3",
+        "target_node_id": "SEC-1.0",
+        "relation_type": "OVERRIDES",
+        "condition_predicate": "(ambient_temp_c > 80) OR (pressure_psi > 1500) OR methanol_present"
+      },
+      {
+        "source_node_id": "SEC-1.3",
+        "target_node_id": "SEC-1.0",
+        "relation_type": "OVERRIDES",
+        "condition_predicate": "loop_id == \"SAFETY_LOCK\""
+      }
+    ]
+  },
+  {
+    "clause_id": "SEC-2.1",
+    "parent_section_id": "SEC-2.0",
+    "precedence_tier": 1,
+    "semantic_edges": [
+      {
+        "source_node_id": "SEC-2.1",
+        "target_node_id": "PART:PIPE-HDPE11-STD",
+        "relation_type": "REFERENCES",
+        "condition_predicate": "pressure_psi >= 100 && pressure_psi <= 150"
+      }
+    ]
+  },
+  {
+    "clause_id": "SEC-2.2",
+    "parent_section_id": "SEC-2.0",
+    "precedence_tier": 1,
+    "semantic_edges": []
+  },
+  {
+    "clause_id": "SEC-2.3",
+    "parent_section_id": "SEC-2.0",
+    "precedence_tier": 1,
+    "semantic_edges": [
+      {
+        "source_node_id": "SEC-2.3",
+        "target_node_id": "PART:BOLT-B7-2H",
+        "relation_type": "REQUIRES",
+        "condition_predicate": null
+      },
+      {
+        "source_node_id": "SEC-4.2",
+        "target_node_id": "SEC-2.3",
+        "relation_type": "OVERRIDES",
+        "condition_predicate": "ambient_temp_c < 0"
+      }
+    ]
+  },
+  {
+    "clause_id": "SEC-3.1",
+    "parent_section_id": "SEC-3.0",
+    "precedence_tier": 1,
+    "semantic_edges": []
+  },
+  {
+    "clause_id": "SEC-3.2",
+    "parent_section_id": "SEC-3.0",
+    "precedence_tier": 1,
+    "semantic_edges": [
+      {
+        "source_node_id": "SEC-3.2",
+        "target_node_id": "PART:DS-04",
+        "relation_type": "TRIGGERS",
+        "condition_predicate": "ambient_temp_c < -15 && loop_id == 'B'"
+      }
+    ]
+  },
+  {
+    "clause_id": "SEC-3.3",
+    "parent_section_id": "SEC-3.0",
+    "precedence_tier": 1,
+    "semantic_edges": [
+      {
+        "source_node_id": "SEC-3.3",
+        "target_node_id": "SEC-3.2",
+        "relation_type": "REFERENCES",
+        "condition_predicate": "methanol_present == true"
+      },
+      {
+        "source_node_id": "SEC-3.3",
+        "target_node_id": "SEC-4.5",
+        "relation_type": "REQUIRES",
+        "condition_predicate": null
+      }
+    ]
+  },
+  {
+    "clause_id": "SEC-4.1",
+    "parent_section_id": "SEC-4.0",
+    "precedence_tier": 2,
+    "semantic_edges": [
+      {
+        "source_node_id": "SEC-2.1",
+        "target_node_id": "PART:PIPE-HDPE11-STD",
+        "relation_type": "REFERENCES",
+        "condition_predicate": null
+      },
+      {
+        "source_node_id": "SEC-4.1",
+        "target_node_id": "PART:PIPE-HDPE11-STD",
+        "relation_type": "PROHIBITS",
+        "condition_predicate": "ambient_temp_c < -35 && pressure_psi > 100"
+      },
+      {
+        "source_node_id": "PART:PIPE-HDPE11-STD",
+        "target_node_id": "PART:PIPE-PEX9-ARC",
+        "relation_type": "UPGRADES_TO",
+        "condition_predicate": "ambient_temp_c < -35 && pressure_psi > 100"
+      }
+    ]
+  },
+  {
+    "clause_id": "SEC-4.2",
+    "parent_section_id": "SEC-4.0",
+    "precedence_tier": 2,
+    "semantic_edges": [
+      {
+        "source_node_id": "SEC-4.2",
+        "target_node_id": "SEC-2.3",
+        "relation_type": "REFERENCES",
+        "condition_predicate": null
+      },
+      {
+        "source_node_id": "SEC-4.2",
+        "target_node_id": "SEC-4.3",
+        "relation_type": "REFERENCES",
+        "condition_predicate": null
+      },
+      {
+        "source_node_id": "SEC-4.3",
+        "target_node_id": "PART:BOLT-B7-2H",
+        "relation_type": "PROHIBITS",
+        "condition_predicate": "ambient_temp_c < -29"
+      },
+      {
+        "source_node_id": "PART:BOLT-B7-2H",
+        "target_node_id": "PART:BOLT-L7-L4",
+        "relation_type": "UPGRADES_TO",
+        "condition_predicate": "ambient_temp_c < -29"
+      }
+    ]
+  },
+  {
+    "clause_id": "SEC-4.3",
+    "parent_section_id": "SEC-4.0",
+    "precedence_tier": 2,
+    "semantic_edges": [
+      {
+        "source_node_id": "SEC-4.3",
+        "target_node_id": "SEC-1.2",
+        "relation_type": "REFERENCES",
+        "condition_predicate": "ambient_temp_c < -30"
+      },
+      {
+        "source_node_id": "SEC-4.3",
+        "target_node_id": "SEC-4.2",
+        "relation_type": "REQUIRES",
+        "condition_predicate": "ambient_temp_c < -30"
+      },
+      {
+        "source_node_id": "SEC-4.3",
+        "target_node_id": "SEC-4.1",
+        "relation_type": "REQUIRES",
+        "condition_predicate": "ambient_temp_c < -30"
+      },
+      {
+        "source_node_id": "SEC-4.3",
+        "target_node_id": "PART:SEAL-VT-09",
+        "relation_type": "PROHIBITS",
+        "condition_predicate": "ambient_temp_c < -26"
+      },
+      {
+        "source_node_id": "SEC-4.3",
+        "target_node_id": "SEC-2.2",
+        "relation_type": "REFERENCES",
+        "condition_predicate": "ambient_temp_c < -26"
+      }
+    ]
+  },
+  {
+    "clause_id": "SEC-4.4",
+    "parent_section_id": "SEC-4.0",
+    "precedence_tier": 2,
+    "semantic_edges": [
+      {
+        "source_node_id": "SEC-4.3",
+        "target_node_id": "PART:SEAL-VT-09",
+        "relation_type": "PROHIBITS",
+        "condition_predicate": null
+      },
+      {
+        "source_node_id": "SEC-3.3",
+        "target_node_id": "PART:SEAL-FVMQ-40",
+        "relation_type": "PROHIBITS",
+        "condition_predicate": "methanol_present"
+      },
+      {
+        "source_node_id": "SEC-4.4",
+        "target_node_id": "PART:SEAL-FVMQ-40",
+        "relation_type": "TRIGGERS",
+        "condition_predicate": "!methanol_present"
+      },
+      {
+        "source_node_id": "SEC-4.4",
+        "target_node_id": "PART:VLV-200-SS",
+        "relation_type": "REQUIRES",
+        "condition_predicate": null
+      }
+    ]
+  },
+  {
+    "clause_id": "SEC-4.5",
+    "parent_section_id": "SEC-4.0",
+    "precedence_tier": 2,
+    "semantic_edges": [
+      {
+        "source_node_id": "SEC-3.2",
+        "target_node_id": "PART:SEAL-FVMQ-40",
+        "relation_type": "PROHIBITS",
+        "condition_predicate": "methanol_present == true"
+      },
+      {
+        "source_node_id": "SEC-3.3",
+        "target_node_id": "PART:SEAL-FVMQ-40",
+        "relation_type": "PROHIBITS",
+        "condition_predicate": "methanol_present == true"
+      },
+      {
+        "source_node_id": "SEC-4.3",
+        "target_node_id": "PART:SEAL-FVMQ-40",
+        "relation_type": "PROHIBITS",
+        "condition_predicate": "ambient_temp_c < -30 AND methanol_present == true"
+      },
+      {
+        "source_node_id": "SEC-4.5",
+        "target_node_id": "PART:SEAL-FVMQ-40",
+        "relation_type": "PROHIBITS",
+        "condition_predicate": "ambient_temp_c < -30 AND methanol_present == true"
+      },
+      {
+        "source_node_id": "SEC-4.5",
+        "target_node_id": "PART:SEAL-FFKM-ULT90",
+        "relation_type": "REQUIRES",
+        "condition_predicate": "ambient_temp_c < -30 AND methanol_present == true"
+      },
+      {
+        "source_node_id": "SEC-4.5",
+        "target_node_id": "PART:VLV-200-LT",
+        "relation_type": "REQUIRES",
+        "condition_predicate": "ambient_temp_c < -30 AND methanol_present == true"
+      },
+      {
+        "source_node_id": "SEC-4.5",
+        "target_node_id": "PART:VLV-200-SS",
+        "relation_type": "PROHIBITS",
+        "condition_predicate": "ambient_temp_c < -30 AND methanol_present == true"
+      },
+      {
+        "source_node_id": "PART:SEAL-FFKM-ULT90",
+        "target_node_id": "PART:VLV-200-SS",
+        "relation_type": "PROHIBITS",
+        "condition_predicate": "true"
+      },
+      {
+        "source_node_id": "PART:VLV-200-SS",
+        "target_node_id": "PART:VLV-200-LT",
+        "relation_type": "UPGRADES_TO",
+        "condition_predicate": "seal == \"PART:SEAL-FFKM-ULT90\""
+      },
+      {
+        "source_node_id": "SEC-4.5",
+        "target_node_id": "SEC-4.3",
+        "relation_type": "REFERENCES",
+        "condition_predicate": "true"
+      },
+      {
+        "source_node_id": "SEC-4.5",
+        "target_node_id": "SEC-3.3",
+        "relation_type": "REFERENCES",
+        "condition_predicate": "true"
+      },
+      {
+        "source_node_id": "SEC-4.5",
+        "target_node_id": "SEC-3.2",
+        "relation_type": "REFERENCES",
+        "condition_predicate": "true"
+      }
+    ]
+  },
+  {
+    "clause_id": "SEC-5.1",
+    "parent_section_id": "SEC-5.0",
+    "precedence_tier": 3,
+    "semantic_edges": [
+      {
+        "source_node_id": "SEC-5.1",
+        "target_node_id": "PART:SEAL-FFKM-ULT90",
+        "relation_type": "REFERENCES",
+        "condition_predicate": "ambient_temp_c <= -40"
+      },
+      {
+        "source_node_id": "SEC-5.1",
+        "target_node_id": "PART:VLV-200-LT",
+        "relation_type": "REFERENCES",
+        "condition_predicate": "ambient_temp_c <= -40"
+      }
+    ]
+  },
+  {
+    "clause_id": "SEC-5.2",
+    "parent_section_id": "SEC-5.0",
+    "precedence_tier": 3,
+    "semantic_edges": [
+      {
+        "source_node_id": "SEC-2.2",
+        "target_node_id": "PART:ACT-PN-100",
+        "relation_type": "REFERENCES",
+        "condition_predicate": null
+      },
+      {
+        "source_node_id": "PART:VLV-200-LT",
+        "target_node_id": "PART:ACT-PN-100",
+        "relation_type": "PROHIBITS",
+        "condition_predicate": "ambient_temp_c < -30"
+      },
+      {
+        "source_node_id": "PART:ACT-PN-100",
+        "target_node_id": "PART:ACT-HYD-350",
+        "relation_type": "UPGRADES_TO",
+        "condition_predicate": "ambient_temp_c < -30"
+      }
+    ]
+  }
+]

@@ -1,0 +1,55 @@
+services:
+  postgres:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: borealis-specs-postgres:pg16
+    container_name: borealis-specs-db
+    restart: unless-stopped
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-borealis_specs}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    ports:
+      - "${POSTGRES_PORT:-5433}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./starter/schema_and_cte.sql:/opt/sql/schema_and_cte.sql:ro
+      - ./docker/init-db.sh:/docker-entrypoint-initdb.d/01-init-db.sh:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER:-postgres} -d $${POSTGRES_DB:-borealis_specs}"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+
+  pipeline:
+    build:
+      context: .
+      dockerfile: Dockerfile.pipeline
+    image: borealis-graph-pipeline:latest
+    container_name: borealis-pipeline
+    depends_on:
+      postgres:
+        condition: service_healthy
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-borealis_specs}
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      DAGSTER_HOME: /app/.dagster_home
+      RUN_DAGSTER_SERVER: ${RUN_DAGSTER_SERVER:-true}
+    ports:
+      - "${DAGSTER_PORT:-3000}:3000"
+    volumes:
+      - ./starter:/app/starter
+      - ./borealis_dagster:/app/borealis_dagster
+      - ./.cache/borealis:/app/.cache/borealis
+      - ./.dagster_home:/app/.dagster_home
+
+volumes:
+  pgdata:
